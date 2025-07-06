@@ -1,9 +1,8 @@
-<% @homepage %>
+<%= @square_new %>
 <div>
 <form action="/square/new">
 <div>Enter a number</div>
 <input name="square" placeholder="What number do you want to take the square of?">
 <div>
-<% @square_results %>
-<button>Calculate square</button>
+<button onclick="/square/results">Calculate square</button>
 </form>

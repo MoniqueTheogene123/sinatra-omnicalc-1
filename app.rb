@@ -6,13 +6,18 @@ get("/") do
 end
 
 get("/square/new") do
-  erb(:homepage)
+  erb(:square_new)
 end
 
-# get("/square_route/new")
-#   erb(:square_route_new)
-# end
+get("/square_root/new") do
+  erb(:square_root_new)
+end
 
+get("/square/results") do
+  @number = params.fetch("square_results").to_i
+  square = number * number
+  erb(:square_results)
+end
 
 # get("/random/new")
 #   erb(:random_new)
