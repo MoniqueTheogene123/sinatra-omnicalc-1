@@ -1,7 +1,24 @@
-<h1>Square Results</h1>
+<h1>
+  Square results
+</h1>
+<% params %>
 
-<p>Number</p>
+<dl>
+  <dt>
+    Number
+  </dt>
+  <dd>
+  <%= @the_num %>
+  </dd>
 
-<p>Square</p>
+  <dt>
+    Square
+  </dt>
+  <dd>
+  <%= @the_result %>
+  </dd>
+</dl>
 
-<a href="/square/new">Calculate another square</p>
+<a href="/square/new">
+  Calculate another square
+</a>
