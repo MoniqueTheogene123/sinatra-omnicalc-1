@@ -21,14 +21,15 @@
     Principal
   </dt>
   <dd>
-    <%= format("$%.2f", @user_pv) %>
+
+    <%= format("$%.2f", @user_pv.to_fs) %>
   </dd>
 
   <dt>
     Payment
   </dt>
   <dd>
-    <%= format("%.2f", @monthly_payment) %>
+    <%= format("$%.2f", @monthly_payment) %>
   </dd>
 </dl>
 

@@ -40,18 +40,14 @@ get ("/payment/results") do
   @user_years = params.fetch("user_years").to_f
   @user_pv = params.fetch("user_pv").to_f
 
-#   def calculate_monthly_payment("user_pv", "user_apr", "user_years")
-#   monthly_rate = user_apr.to_f / 12 / 100  # Convert APR to monthly decimal
-#   months = user_years * 12
-#   numerator = monthly_rate * (1 + monthly_rate) ** months
-#   denominator = (1 + monthly_rate) ** months - 1
-#   (user_pv * numerator / denominator).round(2)  # Round to 2 decimal places (cents)
-# end
-  
-  
-  @monthly_payment = calculate_monthly_payment(@user_pv, @user_apr, @user_years)
+monthly_rate = (@user_apr / 100) / 12
+total_months = @user_years * 12
 
-
+@monthly_payment = if monthly_rate == 0 || total_months == 0
+  @user_pv / total_months
+else
+  (monthly_rate * @user_pv) / (1 - (1 + monthly_rate)**-total_months)
+end
 
   erb(:payment_results)
 end
@@ -65,6 +61,6 @@ get("/random/results") do
   @user_max = params.fetch("user_max").to_f
 
   @random_number = rand(@user_min..@user_max)
-  
+
 erb(:random_results)
 end
