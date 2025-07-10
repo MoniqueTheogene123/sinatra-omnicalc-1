@@ -37,17 +37,20 @@ end
 
 get ("/payment/results") do
   @user_apr = params.fetch("user_apr").to_f
-  @user_years = params.fetch("user_years").to_f
+  @user_years = params.fetch("user_years")
   @user_pv = params.fetch("user_pv").to_f
-
-monthly_rate = (@user_apr / 100) / 12
-total_months = @user_years * 12
-
-@monthly_payment = if monthly_rate == 0 || total_months == 0
-  @user_pv / total_months
-else
-  (monthly_rate * @user_pv) / (1 - (1 + monthly_rate)**-total_months)
-end
+  
+  r = (@user_apr / 100) / 12
+  n = @user_years.to_f * 12
+  
+  numerator = r * @user_pv
+  denominator = 1 - (1 + r) ** -n
+  
+  @payment = numerator / denominator
+  
+  @apr = @user_apr.to_fs(:percentage, {:precision => 4})
+  @pv = @user_pv.to_fs(:currency)
+  @result = @payment.to_fs(:currency)
 
   erb(:payment_results)
 end

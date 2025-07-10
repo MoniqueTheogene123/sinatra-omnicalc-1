@@ -7,7 +7,7 @@
     APR
   </dt>
   <dd>
-    <%= format("%.1f%%", @user_apr) %>
+    <%= @apr %>
   </dd>
 
   <dt>
@@ -22,14 +22,14 @@
   </dt>
   <dd>
 
-    <%= format("$%.2f", @user_pv.to_fs) %>
+    <%= @pv %>
   </dd>
 
   <dt>
     Payment
   </dt>
   <dd>
-    <%= format("$%.2f", @monthly_payment) %>
+    <%= @result %>
   </dd>
 </dl>
 
